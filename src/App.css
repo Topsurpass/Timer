@@ -1,0 +1,48 @@
+body{
+    font-family: roboto;
+}
+.App{
+    background-color:rgb(15, 84, 105);
+    height:100vh;
+    color:white;
+}
+.label{
+    font-size: 3.5em;
+    font-weight: bold;
+}
+.up,.down,.count{
+    font-size: 2.5em;
+}
+.flexTimer p{
+    font-size: 1.8em;
+}
+.timerBox{
+    border:10px solid grey;
+    width:250px;
+    height:20%;
+    border-radius: 20%;
+}
+.arrow{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.playPause{
+    font-size: 30px;
+}
+.time-view{
+    font-size: 4.5em;
+}
+.flexTimer{
+    display:grid;
+    grid-template-columns:1fr;
+    text-align:center;
+}
+@media only screen and (min-width:769px) {
+    .flexTimer{
+        display:flex;
+        justify-content: space-around;
+        min-width:50%;
+        margin: 5% 0%;
+    }
+}
