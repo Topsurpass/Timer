@@ -7,6 +7,8 @@ import {RiPlayFill} from 'react-icons/ri'
 import {MdPause} from 'react-icons/md';
 import {FiRefreshCcw} from'react-icons/fi';
 import beep from './Redux/beep.wav'
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const Compo = styled.div`
   display:flex;
@@ -20,21 +22,38 @@ function App() {
   const initialSec = countDown=== 60 ? '0':countDown;
   const seconds = initialSec < 10 ? '0' + initialSec: initialSec
   const dispatch = useDispatch();
+  const [clickOnce,setclickOnce] =useState(false);
 
+  useEffect(() => {
+    const play = document.getElementById('play');
+    const pause = document.getElementById('pause')
 
-  const startTimer =()=>{  
+    const startTimer =()=>{  
 
-    const handleDispatch =()=>{
-      dispatch(countSeconds(inte));
-    } 
+      const handleDispatch =()=>{
+        dispatch(countSeconds(interval));
+      } 
+      
+      const interval = setInterval(handleDispatch,1000);
+
+      pause.addEventListener('click',()=>{
+        clearInterval(interval);
+        setclickOnce(false); // after pause, setclick to false so play can work again.
+      });
+
+    }
     
-    const inte = setInterval(handleDispatch,1000);
+    if(clickOnce){
+      startTimer();
+    }
+    
+    play.addEventListener('click',()=>setclickOnce(true))
+    
+    return () => {
+      play.removeEventListener('click',()=>setclickOnce(true))
+    }
 
-    document.getElementById('pause').addEventListener('click',()=>{
-      clearInterval(inte);
-    })
-   
-  }
+  }, [clickOnce])
 
   return (
     <Compo className="App">
@@ -50,7 +69,7 @@ function App() {
       </Compo>
 
       <div className='playPause' id='playPause'>
-        <RiPlayFill id='play' onClick={startTimer}/>
+        <RiPlayFill id='play' />
         <MdPause id='pause'/>
         <FiRefreshCcw id='refresh'/>
       </div>

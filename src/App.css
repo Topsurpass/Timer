@@ -29,6 +29,7 @@ body{
 }
 .playPause{
     font-size: 30px;
+    cursor: pointer;
 }
 .time-view{
     font-size: 4.5em;
