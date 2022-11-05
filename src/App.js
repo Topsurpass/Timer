@@ -52,7 +52,7 @@ function App() {
     return () => {
       play.removeEventListener('click',()=>setclickOnce(true))
     }
-
+// eslint-disable-next-line 
   }, [clickOnce])
 
   return (
