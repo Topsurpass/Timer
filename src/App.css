@@ -31,6 +31,9 @@ body{
     font-size: 30px;
     cursor: pointer;
 }
+#play,#pause{
+    margin-right: 20px;
+}
 .time-view{
     font-size: 4.5em;
 }

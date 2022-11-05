@@ -2,7 +2,7 @@ import './App.css';
 import styled from 'styled-components';
 import { TimerApp } from './Redux/TimerApp';
 import { useSelector, useDispatch } from 'react-redux';
-import { countSeconds } from './Redux/slice';
+import { countSeconds, reset } from './Redux/slice';
 import {RiPlayFill} from 'react-icons/ri'
 import {MdPause} from 'react-icons/md';
 import {FiRefreshCcw} from'react-icons/fi';
@@ -27,6 +27,7 @@ function App() {
   useEffect(() => {
     const play = document.getElementById('play');
     const pause = document.getElementById('pause')
+    const refresh = document.getElementById('refresh')
 
     const startTimer =()=>{  
 
@@ -41,11 +42,18 @@ function App() {
         setclickOnce(false); // after pause, setclick to false so play can work again.
       });
 
+      refresh.addEventListener('click',()=>{
+        clearInterval(interval);
+        setclickOnce(false);
+        dispatch(reset())
+      });
+
     }
     
     if(clickOnce){
       startTimer();
     }
+
     
     play.addEventListener('click',()=>setclickOnce(true))
     
@@ -67,7 +75,7 @@ function App() {
         <div className='count time-view' >{countSession}:{seconds}</div>
         <audio src={beep} id='beep' />
       </Compo>
-
+      <br/>
       <div className='playPause' id='playPause'>
         <RiPlayFill id='play' />
         <MdPause id='pause'/>

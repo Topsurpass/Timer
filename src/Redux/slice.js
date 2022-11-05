@@ -55,17 +55,16 @@ export const timerSlice = createSlice({
                 clearInterval(action.payload);
                 state.minutes = 0;
                 state.seconds = 0;
-                // document.getElementById('count').innerHTML= 'Break';
-                // state.minutes = state.countBreak-1;
-                // state.seconds = 59;
-                // if(state.minutes === 0 && state.seconds === 0){
-                //     clearInterval(action.payload);
-                // }
             }
                                       
-        }  
+        },
+        reset:(state)=>{
+           state.countBreak=5;
+            state.minutes=25;
+            state.seconds=60;
+        }
        
     }
 })
-export const {incrementBreak,decrementBreak,incrementSec,decrementSec,countSeconds} = timerSlice.actions;
+export const {incrementBreak,decrementBreak,incrementSec,decrementSec,countSeconds,reset} = timerSlice.actions;
 export default timerSlice.reducer;
